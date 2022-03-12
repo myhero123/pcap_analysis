@@ -6,14 +6,14 @@ exports.modules = {
         ]
     },
     parts: [
-        { name: 'echarts/chart/line', weight: 100 },
-        { name: 'echarts/chart/bar', weight: 100 },
-        { name: 'echarts/chart/scatter', weight: 90 },
-        { name: 'echarts/chart/k', weight: 30 },
-        { name: 'echarts/chart/pie', weight: 90 },
-        { name: 'echarts/chart/radar', weight: 30 },
-        { name: 'echarts/chart/chord', weight: 30 },
-        { name: 'echarts/chart/force', weight: 30 },
+        {name: 'echarts/chart/line', weight: 100},
+        {name: 'echarts/chart/bar', weight: 100},
+        {name: 'echarts/chart/scatter', weight: 90},
+        {name: 'echarts/chart/k', weight: 30},
+        {name: 'echarts/chart/pie', weight: 90},
+        {name: 'echarts/chart/radar', weight: 30},
+        {name: 'echarts/chart/chord', weight: 30},
+        {name: 'echarts/chart/force', weight: 30},
         {
             name: 'echarts/chart/map',
             weight: 90,
@@ -56,26 +56,23 @@ exports.modules = {
                 'echarts/util/mapData/geoJson/zhe_jiang_geo'
             ]
         },
-        { name: 'echarts/chart/gauge', weight: 30 },
-        { name: 'echarts/chart/funnel', weight: 30 },
-        { name: 'echarts/chart/eventRiver', weight: 10 },
-        { name: 'echarts/chart/venn', weight: 10 },
-        { name: 'echarts/chart/treemap', weight: 10 },
-        { name: 'echarts/chart/tree', weight: 10 },
-        { name: 'echarts/chart/wordCloud', weight: 10 },
-        {
-            name: 'echarts/chart/heatmap',
-            weight: 10,
-            includeShallow: [
-                'echarts/layer/heatmap'
-            ]
-        }
+        {name: 'echarts/chart/gauge', weight: 30},
+        {name: 'echarts/chart/funnel', weight: 30},
+        {name: 'echarts/chart/eventRiver', weight: 10},
+        {name: 'echarts/chart/venn', weight: 10},
+        {name: 'echarts/chart/treemap', weight: 10},
+        {name: 'echarts/chart/tree', weight: 10},
+        {name: 'echarts/chart/wordCloud', weight: 10},
+        {name: 'echarts/chart/heatmap', weight: 10, includeShallow: [
+            'echarts/layer/heatmap'
+        ]}
     ]
 };
 
 exports.amd = {
     baseUrl: process.cwd(),
-    packages: [{
+    packages: [
+        {
             name: 'echarts',
             location: '../src',
             main: 'echarts'

@@ -7,6 +7,6 @@ WTF_CSRF_ENABLED = False
 
 SECRET_KEY = '!@#$%8F6F98EC3684AECA1DC44E1CB816E4A5^&*()'
 
-UPLOAD_FOLDER = '/home/my/Pcap/'
-FILE_FOLDER = '/home/my/Files/'
-PDF_FOLDER = '/home/my/Files/PDF/'
+UPLOAD_FOLDER = '/root/data/fxg/Pcap/'
+FILE_FOLDER = '/root/data/fxg/Files/'
+PDF_FOLDER = '/root/data/fxg/Files/PDF/'
