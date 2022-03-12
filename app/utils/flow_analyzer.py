@@ -5,9 +5,8 @@ from scapy.all import *
 import collections
 import time
 
+
 # 时间流量图
-
-
 def time_flow(PCAPS):
     time_flow_dict = collections.OrderedDict()
     start = PCAPS[0].time
@@ -18,9 +17,8 @@ def time_flow(PCAPS):
         time_flow_dict[float('%.3f' % timediff)] = len(corrupt_bytes(pcap))
     return time_flow_dict
 
+
 # 获取抓包主机的IP
-
-
 def get_host_ip(PCAPS):
     ip_list = list()
     for pcap in PCAPS:
@@ -30,9 +28,8 @@ def get_host_ip(PCAPS):
     host_ip = collections.Counter(ip_list).most_common(1)[0][0]
     return host_ip
 
+
 # 数据流入流出统计
-
-
 def data_flow(PCAPS, host_ip):
     data_flow_dict = {'IN': 0, 'OUT': 0}
     for pcap in PCAPS:
@@ -45,9 +42,8 @@ def data_flow(PCAPS, host_ip):
                 pass
     return data_flow_dict
 
+
 # 访问IP地址统计
-
-
 def data_in_out_ip(PCAPS, host_ip):
     in_ip_packet_dict = dict()
     in_ip_len_dict = dict()
@@ -111,9 +107,8 @@ def data_in_out_ip(PCAPS, host_ip):
                   'out_keyp': out_keyp_list, 'out_packet': out_packet_list, 'out_keyl': out_keyl_list, 'out_len': out_len_list}
     return in_ip_dict
 
+
 # 常见协议流量统计
-
-
 def proto_flow(PCAPS):
     proto_flow_dict = collections.OrderedDict()
     proto_flow_dict['IP'] = 0

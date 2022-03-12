@@ -9,10 +9,9 @@ from .utils.pcap_decode import PcapDecode
 from .utils.pcap_filter import get_all_pcap, proto_filter, showdata_from_id
 from .utils.proto_analyzer import common_proto_statistic, pcap_len_statistic, http_statistic, dns_statistic, most_proto_statistic
 from .utils.flow_analyzer import time_flow, data_flow, get_host_ip, data_in_out_ip, proto_flow, most_flow_statistic
-from .utils.ipmap_tools import getmyip, get_ipmap, get_geo
 from .utils.data_extract import web_data, telnet_ftp_data, mail_data, sen_data, client_info
 from .utils.except_info import exception_warning
-from .utils.file_extract import web_file, ftp_file, mail_file, all_files
+#from .utils.file_extract import web_file, ftp_file, mail_file, all_files
 from scapy.all import rdpcap
 import os
 import hashlib
@@ -54,7 +53,7 @@ def upload():
                 try:
                     pcap.save(os.path.join(filepath, PCAP_NAME))
                     PCAPS = rdpcap(os.path.join(filepath, PCAP_NAME))
-                    flash('恭喜你,上传成功！')
+                    flash('上传成功！')
                     return render_template('./upload/upload.html')
                 except Exception as e:
                     flash('上传错误,错误信息:' + str(e))
@@ -96,7 +95,7 @@ PDF_NAME = ''
 @app.route('/datashow/', methods=['POST', 'GET'])
 def datashow():
     if PCAPS == None:
-        flash("请先上传要分析的数据包!")
+        flash("请先上传要分析的数据包!")  # 闪现
         return redirect(url_for('upload'))
     else:
         global PDF_NAME
@@ -173,6 +172,7 @@ def flowanalyzer():
 # 访问地图
 
 
+'''
 @app.route('/ipmap/', methods=['POST', 'GET'])
 def ipmap():
     if PCAPS == None:
@@ -193,8 +193,9 @@ def ipmap():
             return render_template('./dataanalyzer/ipmap.html', geo_data=geo_dict, ip_value=ip_value_list, mygeo=myip_geo)
         else:
             return render_template('./error/neterror.html')
-
+'''
 # ----------------------------------------------数据提取页面---------------------------------------------
+
 
 # Web数据
 
@@ -291,17 +292,6 @@ def telnetdata():
         else:
             return render_template('./dataextract/telnetdata.html', telnetdata=telnetdata_list)
 
-# 客户端信息
-
-
-@app.route('/clientinfo/', methods=['POST', 'GET'])
-def clientinfo():
-    if PCAPS == None:
-        flash("请先上传要分析的数据包!")
-        return redirect(url_for('upload'))
-    else:
-        clientinfo_list = client_info(PCAPS)
-        return render_template('./dataextract/clientinfo.html', clientinfos=clientinfo_list)
 
 # 敏感数据
 
