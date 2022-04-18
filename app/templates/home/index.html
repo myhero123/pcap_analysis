@@ -48,7 +48,7 @@
         .main-content {
             margin-top: 0;
             min-height: 850px;
-            width: 99.7%;
+            width: 100%;
         }
     </style>
 
@@ -57,30 +57,27 @@
 
 <body class="page-header-fixed">
 
-    <!-- BEGIN HEADER -->
+    <!-- HEARDER -->
 
     <div class="header navbar navbar-inverse navbar-fixed-top">
 
-        <!-- BEGIN TOP NAVIGATION BAR -->
+        <!-- 顶部导航菜单 -->
 
         <div class="navbar-inner">
 
             <div class="container-fluid">
 
-                <!-- BEGIN LOGO -->
+                <!-- LOGO -->
 
                 <a class="brand" href="{{url_for('index')}}">
-                    <!--
 
-				   <img src="media/image/logo.png" alt="logo"/>
-				   -->
                     &nbsp;&nbsp;Pcap Analyzer
 
                 </a>
 
-                <!-- END LOGO -->
+                <!--结束LOGO -->
 
-                <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+                <!-- 开始响应菜单切换器 -->
 
                 <a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
 
@@ -88,46 +85,37 @@
 
                 </a>
 
-                <!-- END RESPONSIVE MENU TOGGLER -->
+                <!-- 结束开始响应菜单切换器 -->
 
-                <!-- END TOP NAVIGATION MENU -->
+                <!-- 结束顶部导航菜单 -->
 
             </div>
 
         </div>
 
-        <!-- END TOP NAVIGATION BAR -->
+        <!-- 结束导航栏 -->
 
     </div>
 
-    <!-- END HEADER -->
+    <!-- 结束 HEADER -->
 
-    <!-- BEGIN CONTAINER -->
+    <!-- 容器 -->
 
     <div class="page-container">
 
-        <!-- BEGIN SIDEBAR -->
+        <!-- 侧边栏  -->
 
         <div class="page-sidebar nav-collapse collapse">
 
-            <!-- BEGIN SIDEBAR MENU -->
+            <!-- 侧边栏菜单  -->
 
             <ul class="page-sidebar-menu">
 
                 <li>
-
-                    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-
                     <div class="sidebar-toggler hidden-phone"></div>
-
-                    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-
                 </li>
-
                 <li>
-
                     <br/>
-
                 </li>
 
                 <li class="start active ">
@@ -262,7 +250,7 @@
 
                         <li>
 
-                            <a href="{{ url_for('exceptinfo') }}" target="main-content">
+                            <a href="{{ url_for('machineinfo') }}" target="main-content">
 							   报告分析
 							</a>
                         </li>
@@ -272,57 +260,13 @@
                 </li>
 
 
-                <!--
-                <li class="">
-
-					<a href="javascript:;">
-
-					<i class="icon-download-alt"></i>
-
-					<span class="title">系统设置</span>
-
-					<span class="arrow "></span>
-
-					</a>
-
-					<ul class="sub-menu">
-
-						<li >
-
-							<a href="{{ url_for('webfile') }}" target="main-content">
-							   协议设置
-							</a>
-
-						</li>
-
-						<li >
-
-							<a href="{{ url_for('mailfile') }}" target="main-content">
-							   提取设置
-							</a>
-
-						</li>
-
-						<li >
-
-							<a href="{{ url_for('ftpfile') }}" target="main-content">
-							   策略配置
-							</a>
-
-						</li>
-
-					</ul>
-
-				</li>
-
--->
             </ul>
 
-            <!-- END SIDEBAR MENU -->
+            <!-- 结束侧边栏菜单 -->
 
         </div>
 
-        <!-- END SIDEBAR -->
+        <!-- 结束侧边栏 -->
 
         <!-- BEGIN PAGE -->
         <div class="page-content" id="div-content">
@@ -333,34 +277,26 @@
     </div>
 
 
-    <!-- END CONTAINER -->
+    <!-- 完成容器 -->
 
-    <!-- BEGIN FOOTER -->
+    <!-- FOOTER -->
 
     <div class="footer">
-
         <div class="footer-inner">
-
-            版权所有 侵权必究
-
+            乐山师范学院 冯小岗 1833140816
         </div>
-
-
-
     </div>
 
-    <!-- END FOOTER -->
+    <!-- 完成FOOTER -->
 
-    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+    <!-- 在底部加载javascript，核心插件 -->
 
-    <!-- BEGIN CORE PLUGINS -->
 
     <script src="../../static/media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
 
     <script src="../../static/media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
 
-    <!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
-
+    <!-- 在bootstrap.min.js之前加载jquery-ui-1.10.1.custom.min.js，解决bootstrap工具提示与jquery ui工具冲突-->
     <script src="../../static/media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
 
     <script src="../../static/media/js/bootstrap.min.js" type="text/javascript"></script>
@@ -374,42 +310,26 @@
 
     <script src="../../static/media/js/jquery.uniform.min.js" type="text/javascript"></script>
 
-    <!-- END CORE PLUGINS -->
-
-
-    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <!-- 页面脚本 -->
 
     <script src="../../static/media/js/app.js" type="text/javascript"></script>
 
     <script src="../../static/media/js/index.js" type="text/javascript"></script>
 
-    <!-- END PAGE LEVEL SCRIPTS -->
+    <!-- 完成页面脚本 -->
 
     <script>
         jQuery(document).ready(function() {
 
-            App.init(); // initlayout and core plugins
+            App.init(); // 初始化布局和核心插件
 
-            //Index.init();
+            Index.init();
 
 
         });
     </script>
 
-    <!-- END JAVASCRIPTS -->
-    <!--
-	<script type="text/javascript">
-		function iframechange() {
-			var width = document.getElementsByClassName("page-content").width();
-			var height = document.getElementsByClassName("page-content").height();
-			document.getElementById("iframe-content").width = width;
-			document.getElementById("iframe-content").height = height;
-			console.log(height);
-		}
-		document.getElementsByClassName("page-content").onresize = iframechange();
-	</script>-->
 </body>
 
-<!-- END BODY -->
 
 </html>

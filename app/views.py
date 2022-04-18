@@ -1,6 +1,7 @@
 # coding:UTF-8
 __author__ = 'fxg'
 
+from crypt import methods
 from app import app
 from flask import render_template, request, flash, redirect, url_for, send_from_directory
 from .forms import Upload, ProtoFilter
@@ -11,10 +12,12 @@ from .utils.proto_analyzer import common_proto_statistic, pcap_len_statistic, ht
 from .utils.flow_analyzer import time_flow, data_flow, get_host_ip, data_in_out_ip, proto_flow, most_flow_statistic
 from .utils.data_extract import web_data, telnet_ftp_data, mail_data, sen_data, client_info
 from .utils.except_info import exception_warning
-#from .utils.file_extract import web_file, ftp_file, mail_file, all_files
+from .utils.file_extract import web_file, ftp_file, mail_file, all_files
 from scapy.all import rdpcap
 import os
 import hashlib
+from .utils import machine,feature_engineering as fe
+
 
 # 导入函数到模板中
 app.jinja_env.globals['enumerate'] = enumerate
@@ -24,7 +27,7 @@ PCAP_NAME = ''  # 上传文件名
 PD = PcapDecode()  # 解析器
 PCAPS = None  # 数据包
 
-# --------------------------------------------------------首页，上传------------
+# --------------------------------------------------------首页，上传-----------------------
 # 首页
 
 
@@ -169,31 +172,7 @@ def flowanalyzer():
             most_flow_key.append(key)
         return render_template('./dataanalyzer/flowanalyzer.html', time_flow_keys=list(time_flow_dict.keys()), time_flow_values=list(time_flow_dict.values()), data_flow=data_flow_dict, ip_flow=data_ip_dict, proto_flow=list(proto_flow_dict.values()), most_flow_key=most_flow_key, most_flow_dict=most_flow_dict)
 
-# 访问地图
 
-
-'''
-@app.route('/ipmap/', methods=['POST', 'GET'])
-def ipmap():
-    if PCAPS == None:
-        flash("请先上传要分析的数据包!")
-        return redirect(url_for('upload'))
-    else:
-        myip = getmyip()
-        if myip:
-            host_ip = get_host_ip(PCAPS)
-            ipdata = get_ipmap(PCAPS, host_ip)
-            geo_dict = ipdata[0]
-            ip_value_list = ipdata[1]
-            myip_geo = get_geo(myip)
-            ip_value_list = [(list(d.keys())[0], list(d.values())[0])
-                             for d in ip_value_list]
-            print(ip_value_list)
-            print(geo_dict)
-            return render_template('./dataanalyzer/ipmap.html', geo_data=geo_dict, ip_value=ip_value_list, mygeo=myip_geo)
-        else:
-            return render_template('./error/neterror.html')
-'''
 # ----------------------------------------------数据提取页面---------------------------------------------
 
 
@@ -313,8 +292,6 @@ def sendata():
 # ----------------------------------------------一异常信息页面---------------------------------------------
 
 # 异常数据
-
-
 @app.route('/exceptinfo/', methods=['POST', 'GET'])
 def exceptinfo():
     if PCAPS == None:
@@ -332,10 +309,35 @@ def exceptinfo():
         else:
             return render_template('./exceptions/exception.html', warning=warning_list)
 
+
+# ----------------------------------------------机器学习---------------------------------------------
+@app.route('/machineinfo/', methods=['POST', 'GET'])
+def machineinfo():
+    machine_info=machine.return_info()
+    # machine_info=machine.KNN()
+    return render_template('./machine/machine.html',machine_info=machine_info)
+    # return render_template('./error/404.html')
+
+    # if PCAPS == None:
+    #     flash("请先上传要分析的数据包!")
+    #     return redirect(url_for('upload'))
+    # else:
+    #     dataid = request.args.get('id')
+    #     host_ip = get_host_ip(PCAPS)
+    #     warning_list = exception_warning(PCAPS, host_ip)
+
+        # if dataid:
+        #     if warning_list[int(dataid)-1]['data']:
+        #         return warning_list[int(dataid)-1]['data'].replace('\r\n', '<br>')
+        #     else:
+        #         return '<center><h3>无相关数据包详情</h3></center>'
+        # else:
+        #     return render_template('./machine/machine.html', warning=warning_list)
+
+
+'''
 # ----------------------------------------------文件提取---------------------------------------------
-# WEB文件提取
-
-
+WEB文件提取
 @app.route('/webfile/', methods=['POST', 'GET'])
 def webfile():
     if PCAPS == None:
@@ -424,8 +426,10 @@ def allfile():
         else:
             return render_template('./fileextract/allfile.html', allfiles_dict=allfiles_dict)
 
+'''
+# 错误处理页面
 
-# ----------------------------------------------错误处理页面---------------------------------------------
+
 @app.errorhandler(404)
 def internal_error(error):
     return render_template('./error/404.html'), 404
